@@ -1,0 +1,94 @@
+.pag{
+    background-image: url('../../../multimedia/mundi.jpg');
+    background-repeat: no-repeat;   
+    background-size: cover;
+    width: 100%;
+    height: 100%; 
+    min-height: 100vh; 
+}
+.Home{
+    background-color: rgba(71, 217, 183, 0.637);
+    display:flex;
+    padding: 15px;
+    color: rgb(71, 217, 183);
+    /* display:inline; */
+    font-size: 20px;
+   
+}
+.app{
+    color:rgb(8, 163, 98) ;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.filter{
+    margin-left: 1%;
+    margin-right: 1%;
+    display: grid;
+    grid-template-columns:  10% 10% 10% 10%;
+    margin-inline-end: 7%;
+    display: flex;
+    flex-wrap: wrap;
+    color: rgb(3, 90, 54);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    -webkit-text-stroke-color: rgb(170, 223, 189);
+    display:inline;
+    font-size: 18px;
+
+}
+.contenedor{
+    background-color:rgb(71, 217, 183);
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1px;
+    padding: 5px ;
+}
+
+.formulario{
+    
+    margin-left: 1%;
+    margin-right: 1%;
+    display: grid;
+    grid-template-columns:  10% 10% 10% 10%;
+    margin-inline-end: 7%;
+    display: flex;
+    flex-wrap: wrap;
+    /* margin-left: 25;
+    margin-right: 50;
+    border-radius: 8%;
+    display: inline-block;
+    padding: 10px 10px; */
+    /* background-color: rgba(1, 1, 43, 0.63); */
+    /* color: rgb(112, 133, 252); */
+    letter-spacing: 4px;
+    font-size: 20px;
+    transition: 0,2s;
+}
+.botForm{
+    background-color: rgb(6, 120, 73);
+    color: rgb(190, 255, 228);
+    letter-spacing: 1px;
+    padding: 3px;
+    border-radius: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.grid {
+    margin-left: 1%;
+    margin-right: 1%;
+    display: grid;
+    grid-template-columns:  10% 10% 10% 10%;
+    margin-inline-end: 7%;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    display: grid;
+    margin: 10px 3px 30px 20px;
+    grid-template-columns: 30% 30% 30%;
+    grid-column-gap: 2%;
+    grid-row-gap: 1%
+}
+
+.botForm:hover{
+background:rgb(89, 147, 123) ;
+box-shadow: 0 0 10px rgb(13, 150, 93),
+0 0 10px rgb(38, 210, 139), 0 0 80pxrgb(38, 210, 139);
+}

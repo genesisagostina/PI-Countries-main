@@ -1,0 +1,13 @@
+.search{
+    margin-left: 50%;
+    margin-top: 1%;
+    color: rgb(220, 236, 229);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+.botForm{
+    color: rgb(220, 236, 229);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+::placeholder { color: aliceblue; }
