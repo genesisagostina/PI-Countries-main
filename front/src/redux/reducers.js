@@ -9,7 +9,8 @@ import {
      GET_COUNTRIES_NAME,
      ORDER_BY_COUNTRY,
      ORDER_BY_COUNTRY_POPULATION, 
-     DETAIL_COUNTRY
+     DETAIL_COUNTRY,
+     CLEAN
 
 } from './acciones.js';
 
@@ -18,7 +19,7 @@ import {
     allCountries : [],
     activities: [],
     detail: [], 
-    orderCountries: []
+    orderCountries: [],
  };
  const reducer = (state = inicialState, action) => {
     switch (action.type) {
@@ -33,7 +34,7 @@ import {
                 const allCountries = state.allCountries
                 console.log('All countries to filter', allCountries)
                 console.log('Continent to filter', action.payload)                
-                const continentFiltered = action.payload === "region" ? allCountries : allCountries.filter(el => el.continent === action.payload)
+                const continentFiltered = action.payload === "continent" ? allCountries : allCountries.filter(el => el.continent === action.payload)
                 console.log('Data filter', continentFiltered)
                 return {
                     ...state,
@@ -58,7 +59,11 @@ import {
                     ...state,
                     countries: action.payload
                 }
-
+            case CLEAN: 
+                return {
+                    ...state,
+                        detail: []
+                }
             case ORDER_BY_COUNTRY:
                 let sortarray = action.payload === "asc" ?
                 state.countries.sort(function (a,b){
@@ -86,7 +91,8 @@ import {
 
                 return{
                     ...state, 
-                    orderCountries: sortarray
+                    allCountries: sortarray,
+                    countries: sortarray
                 }
 
                 case ORDER_BY_COUNTRY_POPULATION:
@@ -116,7 +122,8 @@ import {
     
                     return{
                         ...state, 
-                        orderCountries: sortarrayp
+                        allCountries: sortarrayp,
+                        countries: sortarrayp
                     }
 
             case POST_ACTIVITY: 
@@ -135,6 +142,5 @@ import {
     }
     
 }
-
 
 export default reducer; 

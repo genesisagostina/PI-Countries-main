@@ -1,15 +1,16 @@
 import React from "react";
 import './Countrystyle.css';
- 
 
-function Country({ name, flag, region}){
+function Country({ name, flag, id, continent}){
+  console.log('continent ', continent, ' id ', id)
   return (
     <div className="box">
       <div >
         <div className="image">
           <p className="name"><b>{name}</b> 
           <hr/>
-          <p>Continente: {region}</p>
+          <p>ID: {id}</p>
+          <p>Continente: {continent}</p>
           </p>
          
           <div className="contein">

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import {getCountriesName} from '../../redux/acciones';
 import './search.css';
 
-export default function SearchBar(){
+export default function SearchBar(props){
     const dispatch = useDispatch();
     const [name , setName] = useState("")
 
@@ -14,6 +14,7 @@ function handleInputChange(e){
 }
 function handleOnClick(e){
     console.log('OnClicksearchcountry')
+    props.funcPaginado(1)
     dispatch(getCountriesName(name))
 }
 

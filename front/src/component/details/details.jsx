@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {getCountriesDetail} from '../../redux/acciones';
+import {getCountriesDetail, clean} from '../../redux/acciones';
 import { useEffect } from "react";
 import './details.css';
 
@@ -14,7 +14,7 @@ export default function CountryDetail(){
 
     useEffect (() =>{
         dispatch(getCountriesDetail(id));
-        
+        return dispatch(clean());
     },[dispatch, id])
 
     const myDetails = useSelector ((state) => state.detail)
@@ -24,15 +24,13 @@ export default function CountryDetail(){
     return (
         
         <div className="head">
-           
-        
                  <div className="boxx">
                  {/* {myDetails.name} */}
                     <h3>{myDetails.name} </h3>
                     <img src = {myDetails.flag} alt="image_flag" className="image" width="180px" height="100px"/>
                     <h4><b>Capital: </b>{myDetails.capital} </h4>
                     <h4><b>ID: </b>{myDetails.id} </h4>
-                    <h4><b>Continente: </b> {myDetails.region}</h4>
+                    <h4><b>Continente: </b> {myDetails.continent}</h4>
                     <h4><b>Subregion: </b> {myDetails.subregion ? ' ' + myDetails.subregion : '---'} </h4>
                     <h4><b>Población: </b> {myDetails.population} habitantes </h4>
                     <h4><b>Área: </b> {myDetails.area} km2 </h4>    

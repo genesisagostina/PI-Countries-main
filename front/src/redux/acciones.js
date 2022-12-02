@@ -8,6 +8,7 @@ export const FILTER_COUNTRIES_BY_REGION= 'FILTER_COUNTRIES_BY_REGION';
 export const FILTER_CREATED = 'FILTER_CREATED';
 export const ORDER_BY_COUNTRY_POPULATION = 'ORDER_BY_COUNTRY_POPULATION';
 export const POST_ACTIVITY = 'POST_ACTIVITY'
+export const CLEAN = 'CLEAN'
 
 // FALTARIAN LAS DE LAS ACTIVIDADES 
 
@@ -89,6 +90,12 @@ export function getCountries() {
         }
     }
 
+    export function clean(payload){
+        return{
+            type: CLEAN 
+        }
+    }
+
     export function getCountriesDetail(id){
         return async function (dispatch){
         try {
@@ -96,11 +103,12 @@ export function getCountries() {
         return dispatch ({
             type: DETAIL_COUNTRY, 
             payload: json.data
-        })
-         
-    } catch (error) {
-        console.log(error);
-    }
+        })   
+        }catch (error) {
+            console.log(error);
+        }
+
+    
     
 }}
     

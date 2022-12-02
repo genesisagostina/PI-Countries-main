@@ -5,24 +5,33 @@ import { Link } from "react-router-dom";
 import "./style.css";
 
 function validate(activities) {
+  console.log('Estoy validando ', activities)
   let error = {}
   if (!activities.name) {
     error.name = 'Nombre es requerido'
+  }else if(!/^[a-zA-Z. ]+$/.test(activities.name)){
+    error.name = 'El nombre no puede contener simbolos y/o numeros'
   }
-  if (!activities.difficulty) {
+  if (!activities.difficulty.length) {
     error.difficulty = 'Seleccione la Dificultad'
   }
-  // if (!activities.duration) {
-  //   error.duration = 'Duration is required'
-  // }
+  if (activities.difficulty === "") {
+    error.difficulty = 'Seleccione la Dificultad'
+  }
+  if (!activities.duration) {
+    error.duration = 'Duracion es requerida'
+  }
+  else if(!/^[0-9. ]+$/.test(activities.duration)){
+    error.duration = 'La duracion solo puede contener numeros'
+  }
   if (!activities.season) {
     error.season = 'Seleccione la Temporada'
   }
-  if (!activities.countries) {
-    error.countries = 'Seleccione un Pais'
+  if (activities.season === "") {
+    error.season = 'Seleccione la Temporada'
   }
-  if (/^([0-9])*$/.test(activities.name)) {
-    error.name = 'Escoja otro nombre'
+  else if (!activities.countries) {
+    error.countries = 'Seleccione un Pais'
   }
   return error
 }
@@ -60,12 +69,14 @@ export function CreateActivity() {
       season: "",
       countries: [],
     })
-           alert('La actividad fue agregada') 
-             setError(
-        validate({
+      alert('La actividad fue agregada') 
+      setError(
+      validate({
       ...activities,
       [e.target.name] : e.target.value,
-    }))
+    })
+    
+    )
   }
 }
 
@@ -82,6 +93,8 @@ export function CreateActivity() {
       })
     );
   }
+
+
 //---------------------------------------------------------
   // const [country, setCountry] = useState([]);
   function handleDelete(id) {
@@ -124,7 +137,7 @@ export function CreateActivity() {
                 className="botForm"
                 onChange={(e) => handleChange(e)}     
                 key={activities.season}
-                // value={activity.season}
+                value={activities.season}
                 id="season"
                 // type="text"
                 name="season"
@@ -136,7 +149,7 @@ export function CreateActivity() {
                 <option value="Invierno">Invierno</option>
                 <option value="Primavera">Primavera</option>
               </select>
-              <br></br>
+              {error.season && <p className="error">{error.season}</p>}
             </div>
 
             <div className="duration">
@@ -158,7 +171,7 @@ export function CreateActivity() {
             <div>
               <label htmlFor="difficulty">Dificultad: </label>
               <select onChange={(e) => handleChange(e)} className="botForm" key={activities.difficulty} id="difficulty"
-                type="text" name="difficulty" required="required"
+                type="text" name="difficulty" required="required" value={activities.difficulty}
               >
                 <option value="">Seleccionar</option>
                 <option value="1">1</option>
@@ -167,7 +180,7 @@ export function CreateActivity() {
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-              <br></br>
+              {error.difficulty && <p className="error">{error.difficulty}</p>}
             </div>
 
             <div className="Act_Coun">

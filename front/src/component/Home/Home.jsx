@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import {
   getCountries,
   filterCountriesByRegion,
-  filterCreated,
   getActivities,
   orderCountries,
   orderByPopulation,
+  clean
 } from "../../redux/acciones";
 import Country from "../Country/Country";
 import SearchBar from "../SearchBar/SearchBar";
@@ -18,9 +18,8 @@ export default function Home() {
   const dispatch = useDispatch();
   const todosLosPaises = useSelector((state) => state.allCountries);
   const todosLosPaisesConFiltro = useSelector((state) => state.countries);
-  const activities = useSelector((state) => state.activities);
+ // const activities = useSelector((state) => state.activities);
   const [order, setOrder] = useState("");
-
   console.log('Todos los paises ', todosLosPaisesConFiltro)
 
   //creo estados locales. 1º un estado con la pag actual y un stado que me setee esa pag- seteo en 1
@@ -34,7 +33,7 @@ export default function Home() {
   const indexOffirestCountries = indexOfLastCountries - countriesForPage; //
   //paises de la pag actual = corto el array de todos los paises con el slice
   let currentCountries = []
-  if(todosLosPaisesConFiltro != undefined){    
+  if(todosLosPaisesConFiltro !== undefined){    
     if(!Array.isArray(todosLosPaisesConFiltro)){
       currentCountries = todosLosPaises.slice(
         indexOffirestCountries,
@@ -55,28 +54,30 @@ export default function Home() {
   useEffect(() => {
     dispatch(getCountries());
     dispatch(getActivities());
+    dispatch(clean());    
   }, [dispatch]);
+
+
   //funcion del boton "volver"
  
   function handleFilterRegion(e) {
+    setCurrentPage(1)
     dispatch(filterCountriesByRegion(e.target.value));
   }
   ///////ordenamiento//////
   function handleSort(e) {
     e.preventDefault();
     dispatch(orderCountries(e.target.value));
-    setCurrentPage(1);
     setOrder(`Ordenado ${e.target.value}`);
   }
   function handleSortPopulation(e) {
     e.preventDefault();
     dispatch(orderByPopulation(e.target.value));
-    setCurrentPage(1);
     setOrder(`Ordenado ${e.target.value}`);
   }
-  function handleFilterActivities(e){
+  /* function handleFilterActivities(e){
     dispatch(filterCreated(e.target.value));
-};
+}; */
 
   return (
     <div className="pag">
@@ -84,7 +85,7 @@ export default function Home() {
         <Link to="/">
           <h1 className="app">Paises Henry!</h1>
         </Link>
-        <SearchBar />
+        <SearchBar funcPaginado={setCurrentPage}/>
       
       </div>
       <Paginado
@@ -98,8 +99,8 @@ export default function Home() {
             {" "}
             Orden Alfabetico:<h/>
             <select onChange={(e) => handleSort(e)} className="botForm">
-              <option value="asc">Acendente</option>
-              <option value="des">Desendente</option>
+              <option value="asc">Ascendente</option>
+              <option value="des">Descendente</option>
             </select>
           </p>
         </div>
@@ -138,7 +139,7 @@ export default function Home() {
             return (
               <Link to={`/countries/${el.id}`}>
                 <Fragment>
-                  <Country name={el.name} flag={el.flag} region={el.region} />
+                  <Country name={el.name} id={el.id} flag={el.flag} continent={el.continent} />
                 </Fragment>
               </Link>
             );
